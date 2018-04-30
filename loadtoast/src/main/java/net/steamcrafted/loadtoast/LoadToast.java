@@ -104,9 +104,15 @@ public class LoadToast {
 
     private void showInternal(){
         mView.show();
-        ViewHelper.setTranslationX(mView, (mParentView.getWidth() - mView.getWidth()) / 2);
-        ViewHelper.setAlpha(mView, 0f);
-        ViewHelper.setTranslationY(mView, -mView.getHeight() + mTranslationY);
+        try{
+            ViewHelper.setTranslationX(mView, (mParentView.getWidth() - mView.getWidth()) / 2);
+            ViewHelper.setAlpha(mView, 0f);
+            ViewHelper.setTranslationY(mView, -mView.getHeight() + mTranslationY);
+        }catch (Exception e){
+            e.printStackTrace();
+            mVisible = true;
+        }
+        
         //mView.setVisibility(View.VISIBLE);
         ViewPropertyAnimator.animate(mView).alpha(1f).translationY(25 + mTranslationY)
                 .setInterpolator(new DecelerateInterpolator())
@@ -126,8 +132,13 @@ public class LoadToast {
         mParentView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ViewHelper.setTranslationX(mView, (mParentView.getWidth() - mView.getWidth()) / 2);
-                ViewHelper.setTranslationY(mView, -mView.getHeight() + mTranslationY);
+                try {
+                    ViewHelper.setTranslationX(mView, (mParentView.getWidth() - mView.getWidth()) / 2);
+                    ViewHelper.setTranslationY(mView, -mView.getHeight() + mTranslationY);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                
                 mInflated = true;
                 if(!mToastCanceled && mShowCalled) showInternal();
             }
