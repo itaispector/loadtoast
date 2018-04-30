@@ -170,7 +170,7 @@ public class LoadToast {
         slideUp(1000);
     }
 
-    private void slideUp(int startDelay){
+    private void slideUp(final int startDelay){
         mReAttached = false;
 
         mView.post(new Runnable () { 
