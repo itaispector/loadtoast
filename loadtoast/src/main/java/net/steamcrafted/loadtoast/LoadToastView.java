@@ -291,7 +291,8 @@ public class LoadToastView extends ImageView {
     }
     @Override
     protected void onDraw(Canvas c){
-        float ws = Math.max(1f - WIDTH_SCALE, 0f);
+        try{
+            float ws = Math.max(1f - WIDTH_SCALE, 0f);
         // If there is nothing to display, just draw a circle
         if(mText.length() == 0) ws = 0;
 
@@ -405,6 +406,10 @@ public class LoadToastView extends ImageView {
         }else{
             c.drawText(mText, 0, mText.length(), th / 2 + (MAX_TEXT_WIDTH - mTextBounds.width()) / 2, yPos, textPaint);
         }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
     }
 
     @Override
