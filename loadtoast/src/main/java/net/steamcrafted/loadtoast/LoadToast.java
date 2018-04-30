@@ -173,7 +173,9 @@ public class LoadToast {
     private void slideUp(int startDelay){
         mReAttached = false;
 
-        ViewPropertyAnimator.animate(mView).setStartDelay(startDelay).alpha(0f)
+        mView.post(new Runnable () { 
+            
+            ViewPropertyAnimator.animate(mView).setStartDelay(startDelay).alpha(0f)
                 .translationY(-mView.getHeight() + mTranslationY)
                 .setInterpolator(new AccelerateInterpolator())
                 .setDuration(300)
@@ -187,6 +189,10 @@ public class LoadToast {
                 })
                 .start();
 
-        mVisible = false;
+            mVisible = false;
+            
+        });
+        
+        
     }
 }
